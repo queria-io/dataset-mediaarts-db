@@ -1,0 +1,29 @@
+name = "mediaarts_db"
+command = "python main.py"
+
+[targets.default]
+url = "s3://${FDL_S3_BUCKET}"
+public_url = "https://data.queria.io"
+s3_endpoint = "${FDL_S3_ENDPOINT}"
+s3_access_key_id = "${FDL_S3_ACCESS_KEY_ID}"
+s3_secret_access_key = "${FDL_S3_SECRET_ACCESS_KEY}"
+
+[targets.local]
+url = "~/.local/share/fdl"
+public_url = "http://localhost:4001"
+
+[meta]
+license = "メディア芸術データベースデータセット利用条件（自由な二次利用可）"
+license_url = "https://github.com/mediaarts-db/dataset"
+title = "メディア芸術データベース"
+description = """独立行政法人国立美術館 国立アートリサーチセンター（旧 文化庁）が運営する
+メディア芸術データベース（MADB）の書誌メタデータ。
+マンガ単行本の書誌情報（タイトル・巻数・著者・出版者・レーベル・ISBN・出版年月など）を収録する。"""
+cover = "📚"
+tags = ['マンガ', '書誌', '出版', 'ISBN', 'メディア芸術']
+source_url = "https://mediaarts-db.artmuseums.go.jp/"
+repository_url = "https://github.com/flo8s/dataset-mediaarts-db"
+schedule = "yearly"
+
+[meta.schemas]
+main.title = "メイン"

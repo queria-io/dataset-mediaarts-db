@@ -1,0 +1,19 @@
+name: "mediaarts_db"
+version: "1.0.0"
+
+profile: "mediaarts_db"
+
+model-paths: ["models"]
+macro-paths: ["macros", "shared/macros"]
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  mediaarts_db:
+    +database: mediaarts_db
+    main:
+      raw:
+        +materialized: table
+      stg:
+        +materialized: view
+      mart:
+        +materialized: table

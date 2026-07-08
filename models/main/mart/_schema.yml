@@ -1,0 +1,117 @@
+version: 2
+
+models:
+  - name: manga_book
+    description: |
+      マンガ単行本の書誌データ。日本国内で刊行されたマンガ単行本を1冊1レコードで収録し、
+      タイトル・巻数・著者・出版者・レーベル・ISBN・出版年月・ページ数などを持つ。
+      出典: メディア芸術データベース（MADB）データセット（マンガ単行本 cm101）。
+      https://github.com/mediaarts-db/dataset
+      メディア芸術データベースは独立行政法人国立美術館 国立アートリサーチセンター
+      （旧 文化庁）が運営する。
+    access: public
+    config:
+      meta:
+        title: "マンガ単行本（書誌）"
+        published: true
+        source_url: "https://mediaarts-db.artmuseums.go.jp/"
+        tags: ["マンガ", "書誌", "出版", "ISBN", "メディア芸術"]
+    columns:
+      - name: book_id
+        meta:
+          title: 単行本ID
+          description: メディア芸術データベースの資料識別子（例 M189456）。主キー
+      - name: title
+        meta:
+          title: タイトル
+      - name: title_kana
+        meta:
+          title: タイトルヨミ
+          description: ひらがな・カタカナ表記の読み
+      - name: alternate_title
+        meta:
+          title: 別タイトル
+      - name: volume
+        meta:
+          title: 巻表示
+          description: 表示上の巻数・巻次（例 "8"）
+      - name: volume_sort
+        meta:
+          title: 巻の並び順
+          description: シリーズ内の並び替え用数値
+      - name: series_id
+        meta:
+          title: シリーズID
+          description: 所属するマンガ単行本シリーズ（cm104）の識別子（例 C268475）
+      - name: series_name
+        meta:
+          title: シリーズ名
+      - name: creator_id
+        meta:
+          title: 著者ID
+          description: メディア芸術データベースの著者識別子（例 C57152）
+      - name: creator_statement
+        meta:
+          title: 著者表示
+          description: 責任表示（例 "[著]桂正和"）
+      - name: publisher_name
+        meta:
+          title: 出版者
+      - name: publisher_name_kana
+        meta:
+          title: 出版者ヨミ
+      - name: publisher_code
+        meta:
+          title: 出版者コード
+      - name: brand
+        meta:
+          title: レーベル
+          description: 叢書・レーベル名（例 "Young jump comics"）
+      - name: brand_kana
+        meta:
+          title: レーベルヨミ
+      - name: date_published
+        meta:
+          title: 出版年月
+          description: YYYY / YYYY-MM / YYYY-MM-DD が混在する文字列
+      - name: published_year
+        meta:
+          title: 出版年
+      - name: publication_place
+        meta:
+          title: 出版地
+      - name: language
+        meta:
+          title: 言語
+      - name: isbn
+        meta:
+          title: ISBN
+      - name: jpno
+        meta:
+          title: 全国書誌番号
+          description: 国立国会図書館の全国書誌番号（JP番号）
+      - name: ndc
+        meta:
+          title: NDC分類
+          description: 日本十進分類法の分類記号
+      - name: product_id
+        meta:
+          title: 商品コード
+      - name: pages
+        meta:
+          title: ページ数
+          description: 表示形式のまま保持（例 "234p"）
+      - name: book_size
+        meta:
+          title: 判型
+          description: 大きさ（例 "19cm"）
+      - name: price
+        meta:
+          title: 価格
+      - name: note
+        meta:
+          title: 注記
+      - name: source_url
+        meta:
+          title: 詳細ページURL
+          description: メディア芸術データベースの資料詳細ページ

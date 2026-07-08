@@ -1,0 +1,7 @@
+version: 2
+
+models:
+  - name: raw_manga_book
+    description: |
+      メディア芸術データベース マンガ単行本（cm101）の生データ。
+      公式データセットリポジトリの JSON-LD を main.py が平坦化した NDJSON を読み込む。
