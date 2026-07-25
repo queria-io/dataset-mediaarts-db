@@ -1,0 +1,59 @@
+schema: main
+name: raw_manga_book
+description: 'メディア芸術データベース マンガ単行本（cm101）の生データ。
+
+  公式データセットリポジトリの JSON-LD を main.py が平坦化した NDJSON を読み込む。'
+published: false
+fields:
+  - name: book_id
+    title: 単行本ID
+  - name: title
+    title: タイトル
+  - name: title_kana
+    title: タイトルヨミ
+  - name: alternate_title
+    title: 別タイトル
+  - name: volume
+    title: 巻表示
+  - name: volume_sort
+    title: 巻の並び順
+  - name: series_id
+    title: シリーズID
+  - name: series_name
+    title: シリーズ名
+  - name: creator_id
+    title: 著者ID
+  - name: creator_statement
+    title: 著者表示
+  - name: publisher_name
+    title: 出版者
+  - name: publisher_name_kana
+    title: 出版者ヨミ
+  - name: publisher_code
+    title: 出版者コード
+  - name: brand
+    title: レーベル
+  - name: brand_kana
+    title: レーベルヨミ
+  - name: date_published
+    title: 出版年月
+  - name: publication_place
+    title: 出版地
+  - name: language
+    title: 言語
+  - name: isbn
+    title: ISBN
+  - name: jpno
+    title: 全国書誌番号
+  - name: ndc
+    title: NDC分類
+  - name: product_id
+    title: 商品コード
+  - name: pages
+    title: ページ数
+  - name: book_size
+    title: 判型
+  - name: price
+    title: 価格
+  - name: note
+    title: 注記
