@@ -1,0 +1,55 @@
+spec_version: "0.1"
+name: mediaarts_db
+title: メディア芸術データベース
+description: |-
+  独立行政法人国立美術館 国立アートリサーチセンター（旧 文化庁）が運営する
+  メディア芸術データベース（MADB）の書誌メタデータ。
+  マンガ単行本の書誌情報（タイトル・巻数・著者・出版者・レーベル・ISBN・出版年月など）を収録する。
+keywords:
+  - マンガ
+  - 書誌
+  - 出版
+  - ISBN
+  - メディア芸術
+homepage: https://github.com/queria-io/dataset-mediaarts-db
+language: ja
+
+licenses:
+  - JP-MEDIAARTS-DB
+
+sources:
+  - title: メディア芸術データベース（MADB）
+    path: https://mediaarts-db.artmuseums.go.jp/
+  - title: メディア芸術データベース データセット（GitHub）
+    path: https://github.com/mediaarts-db/dataset
+
+contributors:
+  - title: 独立行政法人国立美術館 国立アートリサーチセンター
+    path: https://ncar.artmuseums.go.jp/
+    roles: [rightsHolder]
+
+temporal_coverage: { start: "1900", end: "2022" }
+spatial_coverage: [JP]
+update_frequency: yearly
+cover: 📚
+
+ai_context:
+  instructions: |
+    出版社・レーベル・著者・年ごとのマンガ単行本の刊行状況を調べるのに使う。
+    1行が1冊（巻）で、シリーズは series_id / series_name でまとまる。
+    33万件のうち出版年が入っていないのが1万7千件あるので、年別に数えるときは NULL を除く。
+    出版年の下限には1900年より前の値も入っているが、これは書誌データ側の表記に由来する外れ値で、
+    実質的な収録は20世紀以降。2022年より新しい巻はほとんど入っていない（元データの更新頻度による）。
+    ISBN は29万件に付いているが、ISBN 以前の刊行物には無い。ISBN で名寄せすると古い巻が落ちる。
+    date_published は YYYY / YYYY-MM / YYYY-MM-DD が混在する文字列なので、
+    年で集計するときは published_year を使う。
+    収録はマンガ単行本（分類 cm101）のみで、マンガ雑誌・アニメ・ゲームは含まない。
+  synonyms: [マンガ, 単行本, 書誌, MADB, メディア芸術データベース]
+  examples:
+    - 出版社別の単行本の刊行数を年ごとに出したい
+    - あるシリーズの巻を出版順に並べたい
+    - レーベル別の刊行点数の推移が見たい
+
+schemas:
+  - name: main
+    title: メイン
