@@ -54,7 +54,7 @@
 
 main.py が公式データセットリポジトリからマンガ単行本（cm101）の JSON-LD zip を取得して
 平坦化した NDJSON へ整形し、dbt build で書誌テーブルを再生成する。
-ビルドは `bash scripts/build.sh local` で実行する。
+ビルドは `bash scripts/build.sh` で実行する（Queria に公開する）。
 
 ## ライセンス
 
