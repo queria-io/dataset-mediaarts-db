@@ -1,12 +1,12 @@
 {# メディア芸術データベース マンガ単行本（cm101）の生データ。
    main.py が公式データセットリポジトリの JSON-LD を平坦化して
-   .fdl/madb_manga_book.ndjson に保存する。型変換は stg で行うため全列 VARCHAR で読む。 #}
+   .queria/madb_manga_book.ndjson に保存する。型変換は stg で行うため全列 VARCHAR で読む。 #}
 
 {{ config(materialized='table') }}
 
 select *
 from read_json(
-    '.fdl/madb_manga_book.ndjson',
+    '.queria/madb_manga_book.ndjson',
     format='newline_delimited',
     columns={
         'book_id': 'VARCHAR',

@@ -15,8 +15,8 @@ from madb import download_and_flatten
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger("pipelines")
 
-FDL_DIR = Path(".fdl")
-NDJSON_PATH = FDL_DIR / "madb_manga_book.ndjson"
+WORK_DIR = Path(".queria")
+NDJSON_PATH = WORK_DIR / "madb_manga_book.ndjson"
 
 
 def dbt_build() -> None:
@@ -28,7 +28,7 @@ def dbt_build() -> None:
 
 
 def main() -> None:
-    FDL_DIR.mkdir(exist_ok=True)
+    WORK_DIR.mkdir(exist_ok=True)
 
     logger.info("1/2: madb (マンガ単行本 cm101)")
     rows = download_and_flatten(NDJSON_PATH)
