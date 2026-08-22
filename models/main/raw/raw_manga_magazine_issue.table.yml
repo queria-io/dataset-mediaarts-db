@@ -1,0 +1,65 @@
+schema: main
+name: raw_manga_magazine_issue
+description: 'メディア芸術データベース マンガ雑誌各号（cm102）の生データ。
+
+  公式データセットリポジトリの JSON-LD を main.py が平坦化した NDJSON を読み込む。'
+published: false
+fields:
+  - name: issue_id
+    title: 各号ID
+  - name: magazine_id
+    title: マンガ雑誌ID
+  - name: magazine_name
+    title: 雑誌名
+  - name: magazine_name_kana
+    title: 雑誌名ヨミ
+  - name: issue_label
+    title: 各号の表示名
+  - name: alternate_title
+    title: 別タイトル
+  - name: volume_number
+    title: 巻
+  - name: issue_number
+    title: 号
+  - name: issue_number_displayed
+    title: 表示号数
+  - name: sub_issue_number
+    title: 補助号数
+  - name: total_volume_number
+    title: 通巻
+  - name: combined_issue
+    title: 合併
+  - name: issue_number_displayed_combined
+    title: 表示合併号数
+  - name: year_displayed
+    title: 表示年
+  - name: month_displayed
+    title: 表示月
+  - name: day_displayed
+    title: 表示日
+  - name: date_published
+    title: 出版日
+  - name: date_released
+    title: 発売年月日
+  - name: publisher_name
+    title: 発行者名
+  - name: publisher_name_kana
+    title: 発行者名ヨミ
+  - name: publisher_code
+    title: 発行者コード
+  - name: publisher_person
+    title: 発行人
+  - name: editor
+    title: 編集人
+  - name: pages
+    title: ページ数
+  - name: book_size
+    title: 大きさ
+  - name: price
+    title: 価格
+  - name: ndc
+    title: NDC分類
+  - name: content_rating
+    title: レーティング
+  - name: note
+    title: 備考

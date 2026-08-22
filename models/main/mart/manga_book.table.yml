@@ -45,7 +45,7 @@ fields:
     title: シリーズ名
   - name: creator_id
     title: 著者ID
-    description: メディア芸術データベースの著者識別子（例 C57152）
+    description: メディア芸術データベースの著者識別子（例 C57152）。複数の著者は " | " で連結する
   - name: creator_statement
     title: 著者表示
     description: 責任表示（例 "[著]桂正和"）

@@ -1,0 +1,104 @@
+schema: main
+name: manga_magazine_issue
+title: マンガ雑誌各号（書誌）
+description: 'マンガ雑誌各号の書誌データ。日本国内で刊行されたマンガ雑誌を1号1レコードで収録し、
+
+  雑誌名・巻号・通巻・発行日・発行者・編集人・ページ数・価格などを持つ。
+
+  出典: メディア芸術データベース（MADB）データセット（マンガ雑誌各号 cm102）。
+
+  https://github.com/mediaarts-db/dataset
+
+  メディア芸術データベースは独立行政法人国立美術館 国立アートリサーチセンター
+
+  （旧 文化庁）が運営する。'
+keywords:
+  - マンガ
+  - 雑誌
+  - 書誌
+  - 出版
+  - メディア芸術
+published: true
+sources:
+  - path: https://mediaarts-db.artmuseums.go.jp/
+fields:
+  - name: issue_id
+    title: 各号ID
+    description: メディア芸術データベースの資料識別子（例 M533115）。主キー
+  - name: magazine_id
+    title: マンガ雑誌ID
+    description: 号がまとまる雑誌（cm105 マンガ雑誌）の識別子（例 C119009）
+  - name: magazine_name
+    title: 雑誌名
+  - name: magazine_name_kana
+    title: 雑誌名ヨミ
+    description: ひらがな・カタカナ表記の読み
+  - name: issue_label
+    title: 各号の表示名
+    description: 雑誌名と年・表示号数を連ねた表示用の名称（例 "マーガレット 2004年 表示号数17"）
+  - name: alternate_title
+    title: 別タイトル
+  - name: volume_number
+    title: 巻
+  - name: issue_number
+    title: 号
+  - name: issue_number_displayed
+    title: 表示号数
+    description: 表紙などに表示される号。読者が認知している号数で、巻次とは区別される
+  - name: sub_issue_number
+    title: 補助号数
+    description: 数値以外での順序の記述（例 "9月1日号増刊"）
+  - name: total_volume_number
+    title: 通巻
+  - name: combined_issue
+    title: 合併
+    description: 合併号のとき "合併" が入る
+  - name: issue_number_displayed_combined
+    title: 表示合併号数
+    description: 合併号で表示号数が複数あるときの2つ目の値
+  - name: year_displayed
+    title: 表示年
+    description: 表紙などに表示される年。出版日より収録が多いので、年別に数えるときはこちらを使う
+  - name: month_displayed
+    title: 表示月
+  - name: day_displayed
+    title: 表示日
+  - name: date_published
+    title: 出版日
+    description: YYYY / YYYY-MM / YYYY-MM-DD が混在する文字列
+  - name: published_year
+    title: 出版年
+    description: 出版日から取り出した年
+  - name: date_released
+    title: 発売年月日
+    description: 奥付等に表示される発売日
+  - name: publisher_name
+    title: 発行者名
+  - name: publisher_name_kana
+    title: 発行者名ヨミ
+  - name: publisher_code
+    title: 発行者コード
+  - name: publisher_person
+    title: 発行人
+    description: 発行の責任者である個人の名称
+  - name: editor
+    title: 編集人
+    description: 編集人である個人の名称
+  - name: pages
+    title: ページ数
+    description: 表示形式のまま保持（例 "440p"）
+  - name: book_size
+    title: 大きさ
+    description: 判型（例 "26cm"）
+  - name: price
+    title: 価格
+  - name: ndc
+    title: NDC分類
+  - name: content_rating
+    title: レーティング
+    description: 想定される年齢に基づく利用制限（例 "成年向け雑誌"）
+  - name: note
+    title: 備考
+  - name: source_url
+    title: 詳細ページURL
+    description: メディア芸術データベースの資料詳細ページ

@@ -2,3 +2,5 @@ version: 2
 
 models:
   - name: stg_manga_book
+  - name: stg_manga_magazine_issue
+  - name: stg_manga_book_series
