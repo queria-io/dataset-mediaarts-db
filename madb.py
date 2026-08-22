@@ -80,8 +80,11 @@ def _join(values: list[str]) -> str | None:
 
 
 def _id_suffix(uri: str) -> str:
-    """リソース URI 末尾の ID（M189456 / C57152 等）を取り出す。"""
-    return uri.rstrip("/").rsplit("/", 1)[-1]
+    """リソース URI 末尾の ID（M189456 / C57152 等）を取り出す。
+
+    複数の URI がコンマで連結された値（著者が複数のレコード）も分解する。
+    """
+    return _JOIN.join(u.rstrip("/").rsplit("/", 1)[-1] for u in uri.split(",") if u)
 
 
 def _creator_id(node: dict) -> str | None:
