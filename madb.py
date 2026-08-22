@@ -1,7 +1,7 @@
 """メディア芸術データベース（MADB）データセットの取得・展開。
 
 公式データセットリポジトリ（github.com/mediaarts-db/dataset）から
-マンガ単行本（cm101）の JSON-LD zip を取得し、class:MangaBook ノードを
+情報資源分類ごとの JSON-LD zip を取得し、対象クラスのノードを
 スカラー列に平坦化した NDJSON へ変換する。
 
 JSON-LD の値は文字列・言語タグ付き dict・それらの list が混在するため、
@@ -14,42 +14,11 @@ import json
 import re
 import urllib.request
 import zipfile
+from collections.abc import Callable
+from dataclasses import dataclass
 from pathlib import Path
 
-ZIP_URL = (
-    "https://raw.githubusercontent.com/mediaarts-db/dataset"
-    "/main/data/json-ld/metadata_cm-item_cm101_json.zip"
-)
-
-# 平坦化した NDJSON の列（すべて文字列。型変換は stg で行う）
-FIELDS = [
-    "book_id",
-    "title",
-    "title_kana",
-    "alternate_title",
-    "volume",
-    "volume_sort",
-    "series_id",
-    "series_name",
-    "creator_id",
-    "creator_statement",
-    "publisher_name",
-    "publisher_name_kana",
-    "publisher_code",
-    "brand",
-    "brand_kana",
-    "date_published",
-    "publication_place",
-    "language",
-    "isbn",
-    "jpno",
-    "ndc",
-    "product_id",
-    "pages",
-    "book_size",
-    "price",
-    "note",
-]
+BASE_URL = "https://raw.githubusercontent.com/mediaarts-db/dataset/main/data/json-ld/"
 
 _JOIN = " | "
 
@@ -137,15 +106,16 @@ def _publisher(node: dict) -> tuple[str | None, str | None, str | None]:
     return _join(names), _join(kanas), code
 
 
-def _series_id(node: dict) -> str | None:
+def _part_of_id(node: dict) -> str | None:
+    """上位コレクション（シリーズ・雑誌）の ID。"""
     value = node.get("isPartOf")
     if isinstance(value, str) and value.startswith("http"):
         return _id_suffix(value)
     return None
 
 
-def flatten(node: dict) -> dict:
-    """class:MangaBook ノードを 1 レコードへ平坦化する。"""
+def flatten_manga_book(node: dict) -> dict:
+    """class:MangaBook（マンガ単行本 cm101）を 1 レコードへ平坦化する。"""
     publisher_name, publisher_name_kana, publisher_code = _publisher(node)
     return {
         "book_id": node.get("identifier"),
@@ -154,7 +124,7 @@ def flatten(node: dict) -> dict:
         "alternate_title": _join(_plains(node.get("alternateName"))),
         "volume": node.get("volumeNumber"),
         "volume_sort": node.get("position"),
-        "series_id": _series_id(node),
+        "series_id": _part_of_id(node),
         "series_name": _join(_plains(node.get("seriesName"))),
         "creator_id": _creator_id(node),
         "creator_statement": _creator_statement(node),
@@ -177,9 +147,111 @@ def flatten(node: dict) -> dict:
     }
 
 
-def download_and_flatten(ndjson_path: Path) -> int:
-    """cm101 zip を取得し、平坦化した NDJSON を書き出す。行数を返す。"""
-    with urllib.request.urlopen(ZIP_URL) as resp:
+def flatten_manga_magazine_issue(node: dict) -> dict:
+    """class:MangaMagazineIssue（マンガ雑誌各号 cm102）を 1 レコードへ平坦化する。"""
+    publisher_name, publisher_name_kana, publisher_code = _publisher(node)
+    return {
+        "issue_id": node.get("identifier"),
+        "magazine_id": _part_of_id(node),
+        "magazine_name": _join(_plains(node.get("name"))) or node.get("label"),
+        "magazine_name_kana": _kana(node.get("name")),
+        "issue_label": node.get("label"),
+        "alternate_title": _join(_plains(node.get("alternateName"))),
+        "volume_number": node.get("volumeNumber"),
+        "issue_number": node.get("issueNumber"),
+        "issue_number_displayed": node.get("issueNumberDisplayed"),
+        "sub_issue_number": node.get("subIssueNumber"),
+        "total_volume_number": node.get("totalVolumeNumber"),
+        "combined_issue": node.get("combinedIssue"),
+        "issue_number_displayed_combined": node.get("issueNumberDisplayedCombined"),
+        "year_displayed": node.get("yearDisplayed"),
+        "month_displayed": node.get("monthDisplayed"),
+        "day_displayed": node.get("dayDisplayed"),
+        "date_published": node.get("datePublished"),
+        "date_released": node.get("dateReleased"),
+        "publisher_name": publisher_name,
+        "publisher_name_kana": publisher_name_kana,
+        "publisher_code": publisher_code,
+        "publisher_person": node.get("ma:publisher"),
+        "editor": node.get("editor"),
+        "pages": node.get("numberOfPages"),
+        "book_size": node.get("size"),
+        "price": node.get("price"),
+        "ndc": node.get("ndc"),
+        "content_rating": node.get("contentRating"),
+        "note": node.get("note"),
+    }
+
+
+def flatten_manga_book_series(node: dict) -> dict:
+    """class:MangaBookSeries（マンガ単行本シリーズ cm104）を 1 レコードへ平坦化する。"""
+    publisher_name, publisher_name_kana, publisher_code = _publisher(node)
+    return {
+        "series_id": node.get("identifier"),
+        "title": _join(_plains(node.get("name"))) or node.get("label"),
+        "title_kana": _kana(node.get("name")),
+        "alternate_title": _join(_plains(node.get("alternateName"))),
+        "series_name": _join(_plains(node.get("seriesName"))),
+        "version": node.get("version"),
+        "creator_id": _creator_id(node),
+        "creator_statement": _creator_statement(node),
+        "contributor": _join(_plains(node.get("contributor"))),
+        "original_work_creator": _join(_plains(node.get("originalWorkCreator"))),
+        "publisher_name": publisher_name,
+        "publisher_name_kana": publisher_name_kana,
+        "publisher_code": publisher_code,
+        "brand": _join(_plains(node.get("brand"))),
+        "brand_kana": _kana(node.get("brand")),
+        "date_published": node.get("datePublished"),
+        "date_published_final": node.get("datePublishedFinal"),
+        "volume_count": node.get("numberOfItems"),
+        "ndc": node.get("ndc"),
+        "content_rating": node.get("contentRating"),
+        "additional_genre": node.get("additionalGenre"),
+        "language": node.get("inLanguage"),
+        "publication_place": node.get("location"),
+        "description": node.get("description"),
+        "note": node.get("note"),
+    }
+
+
+@dataclass(frozen=True)
+class Source:
+    """情報資源分類ごとの取得元と平坦化。"""
+
+    zip_name: str
+    node_type: str
+    flatten: Callable[[dict], dict]
+
+    @property
+    def url(self) -> str:
+        return BASE_URL + self.zip_name
+
+
+SOURCES = {
+    "manga_book": Source(
+        "metadata_cm-item_cm101_json.zip", "class:MangaBook", flatten_manga_book
+    ),
+    "manga_magazine_issue": Source(
+        "metadata_cm-item_cm102_json.zip",
+        "class:MangaMagazineIssue",
+        flatten_manga_magazine_issue,
+    ),
+    "manga_book_series": Source(
+        "metadata_cm-col_cm104_json.zip",
+        "class:MangaBookSeries",
+        flatten_manga_book_series,
+    ),
+}
+
+
+def download_and_flatten(source: Source, ndjson_path: Path) -> int:
+    """zip を取得し、平坦化した NDJSON を書き出す。行数を返す。
+
+    zip には対象クラス以外のノード（所蔵情報や掲載作品の空白ノード）も入るため、
+    @type で絞り込む。
+    """
+    with urllib.request.urlopen(source.url) as resp:
         payload = resp.read()
 
     rows = 0
@@ -191,9 +263,9 @@ def download_and_flatten(ndjson_path: Path) -> int:
             with archive.open(member) as f:
                 graph = json.load(f)["@graph"]
             for node in graph:
-                if node.get("@type") != "class:MangaBook":
+                if node.get("@type") != source.node_type:
                     continue
-                record = flatten(node)
+                record = source.flatten(node)
                 out.write(json.dumps(record, ensure_ascii=False) + "\n")
                 rows += 1
     return rows

@@ -1,0 +1,57 @@
+schema: main
+name: raw_manga_book_series
+description: 'メディア芸術データベース マンガ単行本シリーズ（cm104）の生データ。
+
+  公式データセットリポジトリの JSON-LD を main.py が平坦化した NDJSON を読み込む。'
+published: false
+fields:
+  - name: series_id
+    title: シリーズID
+  - name: title
+    title: タイトル
+  - name: title_kana
+    title: タイトルヨミ
+  - name: alternate_title
+    title: 別タイトル
+  - name: series_name
+    title: シリーズ名
+  - name: version
+    title: 版表示
+  - name: creator_id
+    title: 著者ID
+  - name: creator_statement
+    title: 著者表示
+  - name: contributor
+    title: その他の著者
+  - name: original_work_creator
+    title: 原作者
+  - name: publisher_name
+    title: 発行者名
+  - name: publisher_name_kana
+    title: 発行者名ヨミ
+  - name: publisher_code
+    title: 発行者コード
+  - name: brand
+    title: レーベル
+  - name: brand_kana
+    title: レーベルヨミ
+  - name: date_published
+    title: 出版日
+  - name: date_published_final
+    title: 最終巻発行日
+  - name: volume_count
+    title: 全巻数
+  - name: ndc
+    title: NDC分類
+  - name: content_rating
+    title: レーティング
+  - name: additional_genre
+    title: サブジャンル
+  - name: language
+    title: 言語
+  - name: publication_place
+    title: 発行地
+  - name: description
+    title: 概要
+  - name: note
+    title: 備考

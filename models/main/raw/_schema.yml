@@ -5,3 +5,13 @@ models:
     description: |
       メディア芸術データベース マンガ単行本（cm101）の生データ。
       公式データセットリポジトリの JSON-LD を main.py が平坦化した NDJSON を読み込む。
+
+  - name: raw_manga_magazine_issue
+    description: |
+      メディア芸術データベース マンガ雑誌各号（cm102）の生データ。
+      公式データセットリポジトリの JSON-LD を main.py が平坦化した NDJSON を読み込む。
+
+  - name: raw_manga_book_series
+    description: |
+      メディア芸術データベース マンガ単行本シリーズ（cm104）の生データ。
+      公式データセットリポジトリの JSON-LD を main.py が平坦化した NDJSON を読み込む。

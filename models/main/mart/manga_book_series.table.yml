@@ -1,0 +1,96 @@
+schema: main
+name: manga_book_series
+title: マンガ単行本シリーズ（書誌）
+description: 'マンガ単行本シリーズの書誌データ。単行本をまとめるシリーズを1レコードで収録し、
+
+  タイトル・著者・出版者・レーベル・全巻数・初刊と最終巻の発行日などを持つ。
+
+  manga_book の series_id と結合できる。
+
+  出典: メディア芸術データベース（MADB）データセット（マンガ単行本シリーズ cm104）。
+
+  https://github.com/mediaarts-db/dataset
+
+  メディア芸術データベースは独立行政法人国立美術館 国立アートリサーチセンター
+
+  （旧 文化庁）が運営する。'
+keywords:
+  - マンガ
+  - シリーズ
+  - 書誌
+  - 出版
+  - メディア芸術
+published: true
+sources:
+  - path: https://mediaarts-db.artmuseums.go.jp/
+fields:
+  - name: series_id
+    title: シリーズID
+    description: メディア芸術データベースの資料識別子（例 C253219）。主キー。manga_book.series_id と対応する
+  - name: title
+    title: タイトル
+  - name: title_kana
+    title: タイトルヨミ
+    description: ひらがな・カタカナ表記の読み
+  - name: alternate_title
+    title: 別タイトル
+  - name: series_name
+    title: シリーズ名
+    description: このシリーズが所属する上位シリーズの名称
+  - name: version
+    title: 版表示
+    description: 版・エディションの表示（例 "コミック版"）
+  - name: creator_id
+    title: 著者ID
+    description: メディア芸術データベースの著者識別子（例 C61770）。複数の著者は " | " で連結する
+  - name: creator_statement
+    title: 著者表示
+    description: 責任表示（例 "[著]尾玉なみえ"）
+  - name: contributor
+    title: その他の著者
+  - name: original_work_creator
+    title: 原作者
+  - name: publisher_name
+    title: 発行者名
+  - name: publisher_name_kana
+    title: 発行者名ヨミ
+  - name: publisher_code
+    title: 発行者コード
+  - name: brand
+    title: レーベル
+    description: 叢書・レーベル名（例 "シリウスKC"）
+  - name: brand_kana
+    title: レーベルヨミ
+  - name: date_published
+    title: 出版日
+    description: 初刊の出版日。YYYY / YYYY-MM / YYYY-MM-DD が混在する文字列
+  - name: published_year
+    title: 出版年
+    description: 出版日から取り出した年
+  - name: date_published_final
+    title: 最終巻発行日
+    description: 終刊したシリーズの最新巻が発行された日付。元データの YYYYMMDD 詰めを出版日と同じ表記へ揃えたもので、月日が不明な桁は落とす
+  - name: final_published_year
+    title: 最終巻発行年
+  - name: volume_count
+    title: 全巻数
+    description: シリーズを構成する単行本の件数
+  - name: ndc
+    title: NDC分類
+  - name: content_rating
+    title: レーティング
+    description: 想定される年齢に基づく利用制限（例 "成年コミック"）
+  - name: additional_genre
+    title: サブジャンル
+    description: 種別の下位分類（例 "短編集"）
+  - name: language
+    title: 言語
+  - name: publication_place
+    title: 発行地
+  - name: description
+    title: 概要
+  - name: note
+    title: 備考
+  - name: source_url
+    title: 詳細ページURL
+    description: メディア芸術データベースの資料詳細ページ

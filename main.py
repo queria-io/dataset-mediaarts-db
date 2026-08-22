@@ -1,7 +1,7 @@
 """メディア芸術データベース（MADB）の取得 + dbt ビルド。
 
-1. madb: 公式データセットリポジトリからマンガ単行本（cm101）の JSON-LD を取得し、
-         平坦化した NDJSON へ整形する。
+1. madb: 公式データセットリポジトリからマンガの書誌 JSON-LD を取得し、
+         分類ごとに平坦化した NDJSON へ整形する。
 2. dbt:  dbt ビルド。
 """
 
@@ -10,13 +10,16 @@ from pathlib import Path
 
 from dbt.cli.main import dbtRunner
 
-from madb import download_and_flatten
+from madb import SOURCES, download_and_flatten
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger("pipelines")
 
 WORK_DIR = Path(".queria")
-NDJSON_PATH = WORK_DIR / "madb_manga_book.ndjson"
+
+
+def ndjson_path(name: str) -> Path:
+    return WORK_DIR / f"madb_{name}.ndjson"
 
 
 def dbt_build() -> None:
@@ -30,9 +33,11 @@ def dbt_build() -> None:
 def main() -> None:
     WORK_DIR.mkdir(exist_ok=True)
 
-    logger.info("1/2: madb (マンガ単行本 cm101)")
-    rows = download_and_flatten(NDJSON_PATH)
-    logger.info(f"  madb_manga_book.ndjson: {rows} rows")
+    logger.info("1/2: madb")
+    for name, source in SOURCES.items():
+        path = ndjson_path(name)
+        rows = download_and_flatten(source, path)
+        logger.info(f"  {path.name}: {rows} rows")
 
     logger.info("2/2: dbt build")
     dbt_build()

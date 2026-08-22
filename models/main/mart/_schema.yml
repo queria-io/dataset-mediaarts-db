@@ -39,3 +39,85 @@ models:
       - name: price
       - name: note
       - name: source_url
+
+  - name: manga_magazine_issue
+    description: |
+      マンガ雑誌各号の書誌データ。日本国内で刊行されたマンガ雑誌を1号1レコードで収録し、
+      雑誌名・巻号・通巻・発行日・発行者・編集人・ページ数・価格などを持つ。
+      出典: メディア芸術データベース（MADB）データセット（マンガ雑誌各号 cm102）。
+      https://github.com/mediaarts-db/dataset
+      メディア芸術データベースは独立行政法人国立美術館 国立アートリサーチセンター
+      （旧 文化庁）が運営する。
+    access: public
+    columns:
+      - name: issue_id
+      - name: magazine_id
+      - name: magazine_name
+      - name: magazine_name_kana
+      - name: issue_label
+      - name: alternate_title
+      - name: volume_number
+      - name: issue_number
+      - name: issue_number_displayed
+      - name: sub_issue_number
+      - name: total_volume_number
+      - name: combined_issue
+      - name: issue_number_displayed_combined
+      - name: year_displayed
+      - name: month_displayed
+      - name: day_displayed
+      - name: date_published
+      - name: published_year
+      - name: date_released
+      - name: publisher_name
+      - name: publisher_name_kana
+      - name: publisher_code
+      - name: publisher_person
+      - name: editor
+      - name: pages
+      - name: book_size
+      - name: price
+      - name: ndc
+      - name: content_rating
+      - name: note
+      - name: source_url
+
+  - name: manga_book_series
+    description: |
+      マンガ単行本シリーズの書誌データ。単行本をまとめるシリーズを1レコードで収録し、
+      タイトル・著者・出版者・レーベル・全巻数・初刊と最終巻の発行日などを持つ。
+      manga_book の series_id と結合できる。
+      出典: メディア芸術データベース（MADB）データセット（マンガ単行本シリーズ cm104）。
+      https://github.com/mediaarts-db/dataset
+      メディア芸術データベースは独立行政法人国立美術館 国立アートリサーチセンター
+      （旧 文化庁）が運営する。
+    access: public
+    columns:
+      - name: series_id
+      - name: title
+      - name: title_kana
+      - name: alternate_title
+      - name: series_name
+      - name: version
+      - name: creator_id
+      - name: creator_statement
+      - name: contributor
+      - name: original_work_creator
+      - name: publisher_name
+      - name: publisher_name_kana
+      - name: publisher_code
+      - name: brand
+      - name: brand_kana
+      - name: date_published
+      - name: published_year
+      - name: date_published_final
+      - name: final_published_year
+      - name: volume_count
+      - name: ndc
+      - name: content_rating
+      - name: additional_genre
+      - name: language
+      - name: publication_place
+      - name: description
+      - name: note
+      - name: source_url
