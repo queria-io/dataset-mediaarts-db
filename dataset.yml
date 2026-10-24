@@ -15,6 +15,7 @@ keywords:
   - メディア芸術
 homepage: https://github.com/queria-io/dataset-mediaarts-db
 language: ja
+themes: [education_culture]
 
 licenses:
   - JP-MEDIAARTS-DB
