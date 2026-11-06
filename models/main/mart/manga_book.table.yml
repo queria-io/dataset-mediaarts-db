@@ -1,17 +1,10 @@
 schema: main
 name: manga_book
 title: マンガ単行本（書誌）
-description: 'マンガ単行本の書誌データ。日本国内で刊行されたマンガ単行本を1冊1レコードで収録し、
+description: |-
+  日本国内で刊行されたマンガ単行本の書誌情報です。1 行が 1 冊で、タイトル・巻数・著者・出版者・レーベル・ISBN・出版年月・ページ数を持ちます。
 
-  タイトル・巻数・著者・出版者・レーベル・ISBN・出版年月・ページ数などを持つ。
-
-  出典: メディア芸術データベース（MADB）データセット（マンガ単行本 cm101）。
-
-  https://github.com/mediaarts-db/dataset
-
-  メディア芸術データベースは独立行政法人国立美術館 国立アートリサーチセンター
-
-  （旧 文化庁）が運営する。'
+  - 出版年月（date_published）は YYYY・YYYY-MM・YYYY-MM-DD が混在します。年で絞るときは published_year を使ってください
 keywords:
   - マンガ
   - 書誌

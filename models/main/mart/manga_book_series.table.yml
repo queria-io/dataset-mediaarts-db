@@ -1,19 +1,10 @@
 schema: main
 name: manga_book_series
 title: マンガ単行本シリーズ（書誌）
-description: 'マンガ単行本シリーズの書誌データ。単行本をまとめるシリーズを1レコードで収録し、
+description: |-
+  マンガ単行本のシリーズの書誌情報です。1 行が 1 シリーズで、タイトル・著者・出版者・レーベル・全巻数・初刊と最終巻の発行日を持ちます。
 
-  タイトル・著者・出版者・レーベル・全巻数・初刊と最終巻の発行日などを持つ。
-
-  manga_book の series_id と結合できる。
-
-  出典: メディア芸術データベース（MADB）データセット（マンガ単行本シリーズ cm104）。
-
-  https://github.com/mediaarts-db/dataset
-
-  メディア芸術データベースは独立行政法人国立美術館 国立アートリサーチセンター
-
-  （旧 文化庁）が運営する。'
+  - manga_book とは series_id で結合できます
 keywords:
   - マンガ
   - シリーズ
@@ -26,7 +17,7 @@ sources:
 fields:
   - name: series_id
     title: シリーズID
-    description: メディア芸術データベースの資料識別子（例 C253219）。主キー。manga_book.series_id と対応する
+    description: シリーズの資料識別子（例 C253219）。manga_book.series_id と対応
   - name: title
     title: タイトル
   - name: title_kana
@@ -69,7 +60,7 @@ fields:
     description: 出版日から取り出した年
   - name: date_published_final
     title: 最終巻発行日
-    description: 終刊したシリーズの最新巻が発行された日付。元データの YYYYMMDD 詰めを出版日と同じ表記へ揃えたもので、月日が不明な桁は落とす
+    description: 終刊したシリーズの最新巻の発行日。不明な桁は落としている
   - name: final_published_year
     title: 最終巻発行年
   - name: volume_count
