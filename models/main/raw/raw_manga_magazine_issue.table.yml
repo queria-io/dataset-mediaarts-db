@@ -3,7 +3,7 @@ name: raw_manga_magazine_issue
 description: 'メディア芸術データベース マンガ雑誌各号（cm102）の生データ。
 
   公式データセットリポジトリの JSON-LD を main.py が平坦化した NDJSON を読み込む。'
-published: false
+annotations: { queria: { published: false } }
 fields:
   - name: issue_id
     title: 各号ID

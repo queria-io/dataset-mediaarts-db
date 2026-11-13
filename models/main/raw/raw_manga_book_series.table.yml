@@ -3,7 +3,7 @@ name: raw_manga_book_series
 description: 'メディア芸術データベース マンガ単行本シリーズ（cm104）の生データ。
 
   公式データセットリポジトリの JSON-LD を main.py が平坦化した NDJSON を読み込む。'
-published: false
+annotations: { queria: { published: false } }
 fields:
   - name: series_id
     title: シリーズID
