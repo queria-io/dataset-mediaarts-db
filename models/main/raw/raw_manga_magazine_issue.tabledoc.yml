@@ -1,10 +1,9 @@
-schema: main
-name: raw_manga_magazine_issue
-description: 'メディア芸術データベース マンガ雑誌各号（cm102）の生データ。
-
-  公式データセットリポジトリの JSON-LD を main.py が平坦化した NDJSON を読み込む。'
-annotations: { queria: { published: false } }
-fields:
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: |-
+  メディア芸術データベース マンガ雑誌各号（cm102）の生データ。
+  公式データセットリポジトリの JSON-LD を main.py が平坦化した NDJSON を読み込む。
+hidden: true
+columns:
   - name: issue_id
     title: 各号ID
   - name: magazine_id
