@@ -1,17 +1,15 @@
-schema: main
-name: manga_magazine_issue
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
 title: マンガ雑誌各号（書誌）
-description: |-
-  日本国内で刊行されたマンガ雑誌の各号の書誌情報です。1 行が 1 号で、雑誌名・巻号・通巻・発行日・発行者・編集人・ページ数・価格を持ちます。
-keywords:
+description: 日本国内で刊行されたマンガ雑誌の各号の書誌情報です。1 行が 1 号で、雑誌名・巻号・通巻・発行日・発行者・編集人・ページ数・価格を持ちます。
+topics:
   - マンガ
   - 雑誌
   - 書誌
   - 出版
   - メディア芸術
 sources:
-  - path: https://mediaarts-db.artmuseums.go.jp/
-fields:
+  - mediaarts-db
+columns:
   - name: issue_id
     title: 各号ID
     description: メディア芸術データベースの資料識別子（例 M533115）。主キー

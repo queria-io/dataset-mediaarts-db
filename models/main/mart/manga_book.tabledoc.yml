@@ -1,19 +1,18 @@
-schema: main
-name: manga_book
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
 title: マンガ単行本（書誌）
 description: |-
   日本国内で刊行されたマンガ単行本の書誌情報です。1 行が 1 冊で、タイトル・巻数・著者・出版者・レーベル・ISBN・出版年月・ページ数を持ちます。
 
   - 出版年月（date_published）は YYYY・YYYY-MM・YYYY-MM-DD が混在します。年で絞るときは published_year を使ってください
-keywords:
+topics:
   - マンガ
   - 書誌
   - 出版
   - ISBN
   - メディア芸術
 sources:
-  - path: https://mediaarts-db.artmuseums.go.jp/
-fields:
+  - mediaarts-db
+columns:
   - name: book_id
     title: 単行本ID
     description: メディア芸術データベースの資料識別子（例 M189456）。主キー

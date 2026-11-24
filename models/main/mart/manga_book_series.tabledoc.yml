@@ -1,19 +1,18 @@
-schema: main
-name: manga_book_series
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
 title: マンガ単行本シリーズ（書誌）
 description: |-
   マンガ単行本のシリーズの書誌情報です。1 行が 1 シリーズで、タイトル・著者・出版者・レーベル・全巻数・初刊と最終巻の発行日を持ちます。
 
   - manga_book とは series_id で結合できます
-keywords:
+topics:
   - マンガ
   - シリーズ
   - 書誌
   - 出版
   - メディア芸術
 sources:
-  - path: https://mediaarts-db.artmuseums.go.jp/
-fields:
+  - mediaarts-db
+columns:
   - name: series_id
     title: シリーズID
     description: シリーズの資料識別子（例 C253219）。manga_book.series_id と対応
